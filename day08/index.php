@@ -35,18 +35,45 @@ echo "已建立物件的數量:".Rec::$count;
 echo "<br>";
 
 
-class FrontEndDeveloper{
-    private $basicSalary = 25000;
-    private $pieceRate = 5000;
-    private $pieceWorkNumber = 0;
-    public function __construct($pieceNumber){
-        $this->pieceWorkNumber = $pieceNumber;
+// class FrontEndDeveloper{
+//     private $basicSalary = 25000;
+//     private $pieceRate = 5000;
+//     private $pieceWorkNumber = 0;
+//     public function __construct($pieceNumber){
+//         $this->pieceWorkNumber = $pieceNumber;
+//     }
+//     public function getTotalSalary(){
+//         return $this->basicSalary + ($this->pieceRate * $this->pieceWorkNumber);
+
+//     }
+// }
+
+
+
+//protected 繼承
+class Employee{
+    protected $basicSalary = 25000;
+    protected $pieceRate = 0;
+    protected $pieceWorkNumber = 0;
+
+    public function __construct($numberInput){
+        $this->pieceWorkNumber = $numberInput;
     }
+
     public function getTotalSalary(){
         return $this->basicSalary + ($this->pieceRate * $this->pieceWorkNumber);
-
     }
 }
-$ann = new FrontEndDeveloper(5);
-echo "ann的薪水".$ann->getTotalSalary();
+
+//繼承Employee 寫唯一差異的值
+class FrontEndDeveloper extends Employee{
+    protected $pieceRate = 5000;
+}
+class UIDeveloper extends Employee{
+    protected $pieceRate = 4000;
+}
+$anna = new FrontEndDeveloper(5);
+$amy = new UIDeveloper(10);
+echo "anna的薪水".$anna->getTotalSalary()."<br>";
+echo "amy的薪水".$amy->getTotalSalary()."<br>";
 ?>
